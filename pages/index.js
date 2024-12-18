@@ -20,7 +20,7 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/posts');
+  const res = await fetch('https://static-site-xi-one.vercel.app//api/posts');
   const posts = await res.json();
   return { props: { posts } };
 }

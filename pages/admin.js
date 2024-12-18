@@ -7,14 +7,14 @@ export default function Admin() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/posts')
+    fetch('https://static-site-xi-one.vercel.app/api/posts')
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
 
   const handleAdd = async () => {
     const newPost = { title, content };
-    const res = await fetch('http://localhost:3000/api/posts', {
+    const res = await fetch('https://static-site-xi-one.vercel.app/api/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newPost),
@@ -26,7 +26,7 @@ export default function Admin() {
   };
 
   const handleDelete = async (id) => {
-    await fetch('http://localhost:3000/api/posts', {
+    await fetch('https://static-site-xi-one.vercel.app/api/posts', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
