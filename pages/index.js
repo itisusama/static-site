@@ -1,6 +1,4 @@
 "use client"
-import fs from 'fs';
-import path from 'path';
 
 export default function Home({ posts }) {
   return (
@@ -22,8 +20,7 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps() {
-  const filePath = path.join(process.cwd(), 'public', 'data.json');
-  const jsonData = fs.readFileSync(filePath, 'utf-8');
-  const posts = JSON.parse(jsonData);
+  const res = await fetch('http://localhost:3000/api/posts');
+  const posts = await res.json();
   return { props: { posts } };
 }

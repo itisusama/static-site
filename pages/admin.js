@@ -7,14 +7,14 @@ export default function Admin() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    fetch('https://static-site-smoky.vercel.app/api/posts')
+    fetch('http://localhost:3000/api/posts')
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
 
   const handleAdd = async () => {
     const newPost = { title, content };
-    const res = await fetch('https://static-site-smoky.vercel.app/api/posts', {
+    const res = await fetch('http://localhost:3000/api/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newPost),
@@ -26,7 +26,7 @@ export default function Admin() {
   };
 
   const handleDelete = async (id) => {
-    await fetch('https://static-site-smoky.vercel.app/api/posts', {
+    await fetch('http://localhost:3000/api/posts', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
