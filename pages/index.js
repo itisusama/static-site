@@ -20,8 +20,20 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps(context) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://127.0.0.1:3000';
-  const res = await fetch(`${baseUrl}/api/posts`);
-  const posts = await res.json();
-  return { props: { posts } };
+  // Use a relative API path
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}` // Production
+    : 'http://localhost:3000'; // Local
+
+  try {
+    const res = await fetch(`${baseUrl}/api/posts`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch posts');
+    }
+    const posts = await res.json();
+    return { props: { posts } };
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    return { props: { posts: [] } };
+  }
 }
