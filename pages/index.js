@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 export default function Home({ posts }) {
   return (
@@ -19,8 +19,9 @@ export default function Home({ posts }) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch('https://static-site-xi-one.vercel.app//api/posts');
+export async function getServerSideProps(context) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+  const res = await fetch(`${baseUrl}/api/posts`);
   const posts = await res.json();
   return { props: { posts } };
 }
