@@ -20,13 +20,8 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps(context) {
-  // Use a relative API path
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}` // Production
-    : 'http://localhost:3000'; // Local
-
   try {
-    const res = await fetch(`${baseUrl}/api/posts`);
+    const res = await fetch("https://static-site-xi-one.vercel.app/api/posts");
     if (!res.ok) {
       throw new Error('Failed to fetch posts');
     }
